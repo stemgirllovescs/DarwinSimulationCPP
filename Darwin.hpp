@@ -153,27 +153,6 @@ public:
         }
     }
 
-    // printing for testing purposes
-    void print_offgrid(int turn) const {
-
-        // vector<vector<string>> grid;
-        cout << "Turn = " << turn << "." << endl;
-        cout << "  ";
-        for (int j = 0; j < cols; j++) {
-            cout << j % 10;
-        }
-        cout << endl;
-
-        for (int i = 0; i < rows; i++) {
-            cout << i % 10 << " ";
-            for (int j = 0; j < cols; j++) {
-                cout << (grid[i][j] ? grid[i][j]->get_species_type()[0] : '.');
-            }
-            cout << endl;
-        }
-        cout << endl;
-    }
-
     // cleans up the board
     ~Darwin() {
         for (auto& row : grid) {
