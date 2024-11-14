@@ -193,7 +193,352 @@ TEST(DarwinRun, test2)
     ASSERT_EQ(truth1, truth2);
 }
 
-TEST (DarwinSpecificTest, test001)
+TEST (DarwinRun, test3)
 {
+    Species food, hopper, rover, trap;
 
+    bool truth1 = true;
+    bool truth2 = true;
+
+    Darwin darwin(5, 6);
+
+    food.add_instruction(Instruction::LEFT);
+    food.add_instruction(Instruction::GO, 0);
+
+    hopper.add_instruction(Instruction::HOP);
+    hopper.add_instruction(Instruction::GO, 0);
+
+    rover.add_instruction(Instruction::IF_ENEMY, 9);
+    rover.add_instruction(Instruction::IF_EMPTY, 7);
+    rover.add_instruction(Instruction::IF_RANDOM, 5);
+    rover.add_instruction(Instruction::LEFT);
+    rover.add_instruction(Instruction::GO, 0);
+    rover.add_instruction(Instruction::RIGHT);
+    rover.add_instruction(Instruction::GO, 0);
+    rover.add_instruction(Instruction::HOP);
+    rover.add_instruction(Instruction::GO, 0);
+    rover.add_instruction(Instruction::INFECT);
+    rover.add_instruction(Instruction::GO, 0);
+
+    trap.add_instruction(Instruction::IF_ENEMY, 3);
+    trap.add_instruction(Instruction::LEFT);
+    trap.add_instruction(Instruction::GO, 0);
+    trap.add_instruction(Instruction::INFECT);
+    trap.add_instruction(Instruction::GO, 0);
+
+    darwin.add_species("f", food);
+    darwin.add_species("h", hopper);
+    darwin.add_species("r", rover);
+    darwin.add_species("t", trap);
+    
+    string species_name(1, 'r');
+    darwin.add_creature(species_name, 4, 2, 'w');
+    string species_name1(1, 'h');
+    darwin.add_creature(species_name1, 1, 0, 'n');
+    string species_name2(1, 'f');
+    darwin.add_creature(species_name2, 1, 4, 'e');
+
+    darwin.simulate(1880, 185);
+
+    ASSERT_EQ(truth1, truth2);
+}
+
+TEST (DarwinRun, test4)
+{
+    Species food, hopper, rover, trap;
+
+    bool truth1 = true;
+    bool truth2 = true;
+
+    Darwin darwin(5, 6);
+
+    food.add_instruction(Instruction::LEFT);
+    food.add_instruction(Instruction::GO, 0);
+
+    hopper.add_instruction(Instruction::HOP);
+    hopper.add_instruction(Instruction::GO, 0);
+
+    rover.add_instruction(Instruction::IF_ENEMY, 9);
+    rover.add_instruction(Instruction::IF_EMPTY, 7);
+    rover.add_instruction(Instruction::IF_RANDOM, 5);
+    rover.add_instruction(Instruction::LEFT);
+    rover.add_instruction(Instruction::GO, 0);
+    rover.add_instruction(Instruction::RIGHT);
+    rover.add_instruction(Instruction::GO, 0);
+    rover.add_instruction(Instruction::HOP);
+    rover.add_instruction(Instruction::GO, 0);
+    rover.add_instruction(Instruction::INFECT);
+    rover.add_instruction(Instruction::GO, 0);
+
+    trap.add_instruction(Instruction::IF_ENEMY, 3);
+    trap.add_instruction(Instruction::LEFT);
+    trap.add_instruction(Instruction::GO, 0);
+    trap.add_instruction(Instruction::INFECT);
+    trap.add_instruction(Instruction::GO, 0);
+
+    darwin.add_species("f", food);
+    darwin.add_species("h", hopper);
+    darwin.add_species("r", rover);
+    darwin.add_species("t", trap);
+    
+    string species_name(1, 't');
+    darwin.add_creature(species_name, 4, 1, 'w');
+    string species_name1(1, 't');
+    darwin.add_creature(species_name1, 1, 3, 's');
+    string species_name2(1, 'r');
+    darwin.add_creature(species_name2, 4, 4, 's');
+
+    darwin.simulate(1958, 51);
+
+    ASSERT_EQ(truth1, truth2);
+}
+
+TEST (DarwinRun, test5)
+{
+    Species food, hopper, rover, trap;
+
+    bool truth1 = true;
+    bool truth2 = true;
+
+    Darwin darwin(5, 6);
+
+    food.add_instruction(Instruction::LEFT);
+    food.add_instruction(Instruction::GO, 0);
+
+    hopper.add_instruction(Instruction::HOP);
+    hopper.add_instruction(Instruction::GO, 0);
+
+    rover.add_instruction(Instruction::IF_ENEMY, 9);
+    rover.add_instruction(Instruction::IF_EMPTY, 7);
+    rover.add_instruction(Instruction::IF_RANDOM, 5);
+    rover.add_instruction(Instruction::LEFT);
+    rover.add_instruction(Instruction::GO, 0);
+    rover.add_instruction(Instruction::RIGHT);
+    rover.add_instruction(Instruction::GO, 0);
+    rover.add_instruction(Instruction::HOP);
+    rover.add_instruction(Instruction::GO, 0);
+    rover.add_instruction(Instruction::INFECT);
+    rover.add_instruction(Instruction::GO, 0);
+
+    trap.add_instruction(Instruction::IF_ENEMY, 3);
+    trap.add_instruction(Instruction::LEFT);
+    trap.add_instruction(Instruction::GO, 0);
+    trap.add_instruction(Instruction::INFECT);
+    trap.add_instruction(Instruction::GO, 0);
+
+    darwin.add_species("f", food);
+    darwin.add_species("h", hopper);
+    darwin.add_species("r", rover);
+    darwin.add_species("t", trap);
+    
+    string species_name(1, 'h');
+    darwin.add_creature(species_name, 4, 2, 'e');
+    string species_name1(1, 'h');
+    darwin.add_creature(species_name1, 3, 4, 'n');
+    string species_name2(1, 'f');
+    darwin.add_creature(species_name2, 0, 0, 'n');
+
+    darwin.simulate(47, 148);
+
+    ASSERT_EQ(truth1, truth2);
+}
+
+TEST (DarwinRun, test6)
+{
+    Species food, hopper, rover, trap;
+
+    bool truth1 = true;
+    bool truth2 = true;
+
+    Darwin darwin(5, 6);
+
+    food.add_instruction(Instruction::LEFT);
+    food.add_instruction(Instruction::GO, 0);
+
+    hopper.add_instruction(Instruction::HOP);
+    hopper.add_instruction(Instruction::GO, 0);
+
+    rover.add_instruction(Instruction::IF_ENEMY, 9);
+    rover.add_instruction(Instruction::IF_EMPTY, 7);
+    rover.add_instruction(Instruction::IF_RANDOM, 5);
+    rover.add_instruction(Instruction::LEFT);
+    rover.add_instruction(Instruction::GO, 0);
+    rover.add_instruction(Instruction::RIGHT);
+    rover.add_instruction(Instruction::GO, 0);
+    rover.add_instruction(Instruction::HOP);
+    rover.add_instruction(Instruction::GO, 0);
+    rover.add_instruction(Instruction::INFECT);
+    rover.add_instruction(Instruction::GO, 0);
+
+    trap.add_instruction(Instruction::IF_ENEMY, 3);
+    trap.add_instruction(Instruction::LEFT);
+    trap.add_instruction(Instruction::GO, 0);
+    trap.add_instruction(Instruction::INFECT);
+    trap.add_instruction(Instruction::GO, 0);
+
+    darwin.add_species("f", food);
+    darwin.add_species("h", hopper);
+    darwin.add_species("r", rover);
+    darwin.add_species("t", trap);
+    
+    string species_name(1, 'h');
+    darwin.add_creature(species_name, 0, 4, 'n');
+    string species_name1(1, 'f');
+    darwin.add_creature(species_name1, 4, 3, 's');
+    string species_name2(1, 'h');
+    darwin.add_creature(species_name2, 2, 4, 'n');
+
+    darwin.simulate(919, 136);
+
+    ASSERT_EQ(truth1, truth2);
+}
+
+TEST (DarwinRun, test7)
+{
+    Species food, hopper, rover, trap;
+
+    bool truth1 = true;
+    bool truth2 = true;
+
+    Darwin darwin(5, 6);
+
+    food.add_instruction(Instruction::LEFT);
+    food.add_instruction(Instruction::GO, 0);
+
+    hopper.add_instruction(Instruction::HOP);
+    hopper.add_instruction(Instruction::GO, 0);
+
+    rover.add_instruction(Instruction::IF_ENEMY, 9);
+    rover.add_instruction(Instruction::IF_EMPTY, 7);
+    rover.add_instruction(Instruction::IF_RANDOM, 5);
+    rover.add_instruction(Instruction::LEFT);
+    rover.add_instruction(Instruction::GO, 0);
+    rover.add_instruction(Instruction::RIGHT);
+    rover.add_instruction(Instruction::GO, 0);
+    rover.add_instruction(Instruction::HOP);
+    rover.add_instruction(Instruction::GO, 0);
+    rover.add_instruction(Instruction::INFECT);
+    rover.add_instruction(Instruction::GO, 0);
+
+    trap.add_instruction(Instruction::IF_ENEMY, 3);
+    trap.add_instruction(Instruction::LEFT);
+    trap.add_instruction(Instruction::GO, 0);
+    trap.add_instruction(Instruction::INFECT);
+    trap.add_instruction(Instruction::GO, 0);
+
+    darwin.add_species("f", food);
+    darwin.add_species("h", hopper);
+    darwin.add_species("r", rover);
+    darwin.add_species("t", trap);
+    
+    string species_name(1, 't');
+    darwin.add_creature(species_name, 1, 1, 'n');
+    string species_name1(1, 'h');
+    darwin.add_creature(species_name1, 2, 5, 'w');
+    string species_name2(1, 'r');
+    darwin.add_creature(species_name2, 4, 4, 'w');
+
+    darwin.simulate(416, 87);
+
+    ASSERT_EQ(truth1, truth2);
+}
+
+TEST (DarwinRun, test8)
+{
+    Species food, hopper, rover, trap;
+
+    bool truth1 = true;
+    bool truth2 = true;
+
+    Darwin darwin(5, 6);
+
+    food.add_instruction(Instruction::LEFT);
+    food.add_instruction(Instruction::GO, 0);
+
+    hopper.add_instruction(Instruction::HOP);
+    hopper.add_instruction(Instruction::GO, 0);
+
+    rover.add_instruction(Instruction::IF_ENEMY, 9);
+    rover.add_instruction(Instruction::IF_EMPTY, 7);
+    rover.add_instruction(Instruction::IF_RANDOM, 5);
+    rover.add_instruction(Instruction::LEFT);
+    rover.add_instruction(Instruction::GO, 0);
+    rover.add_instruction(Instruction::RIGHT);
+    rover.add_instruction(Instruction::GO, 0);
+    rover.add_instruction(Instruction::HOP);
+    rover.add_instruction(Instruction::GO, 0);
+    rover.add_instruction(Instruction::INFECT);
+    rover.add_instruction(Instruction::GO, 0);
+
+    trap.add_instruction(Instruction::IF_ENEMY, 3);
+    trap.add_instruction(Instruction::LEFT);
+    trap.add_instruction(Instruction::GO, 0);
+    trap.add_instruction(Instruction::INFECT);
+    trap.add_instruction(Instruction::GO, 0);
+
+    darwin.add_species("f", food);
+    darwin.add_species("h", hopper);
+    darwin.add_species("r", rover);
+    darwin.add_species("t", trap);
+    
+    string species_name(1, 'h');
+    darwin.add_creature(species_name, 0, 1, 'w');
+    string species_name1(1, 'r');
+    darwin.add_creature(species_name1, 4, 5, 's');
+    string species_name2(1, 't');
+    darwin.add_creature(species_name2, 1, 0, 'w');
+
+    darwin.simulate(754, 172);
+
+    ASSERT_EQ(truth1, truth2);
+}
+
+TEST (DarwinRun, test9)
+{
+    Species food, hopper, rover, trap;
+
+    bool truth1 = true;
+    bool truth2 = true;
+
+    Darwin darwin(5, 6);
+
+    food.add_instruction(Instruction::LEFT);
+    food.add_instruction(Instruction::GO, 0);
+
+    hopper.add_instruction(Instruction::HOP);
+    hopper.add_instruction(Instruction::GO, 0);
+
+    rover.add_instruction(Instruction::IF_ENEMY, 9);
+    rover.add_instruction(Instruction::IF_EMPTY, 7);
+    rover.add_instruction(Instruction::IF_RANDOM, 5);
+    rover.add_instruction(Instruction::LEFT);
+    rover.add_instruction(Instruction::GO, 0);
+    rover.add_instruction(Instruction::RIGHT);
+    rover.add_instruction(Instruction::GO, 0);
+    rover.add_instruction(Instruction::HOP);
+    rover.add_instruction(Instruction::GO, 0);
+    rover.add_instruction(Instruction::INFECT);
+    rover.add_instruction(Instruction::GO, 0);
+
+    trap.add_instruction(Instruction::IF_ENEMY, 3);
+    trap.add_instruction(Instruction::LEFT);
+    trap.add_instruction(Instruction::GO, 0);
+    trap.add_instruction(Instruction::INFECT);
+    trap.add_instruction(Instruction::GO, 0);
+
+    darwin.add_species("f", food);
+    darwin.add_species("h", hopper);
+    darwin.add_species("r", rover);
+    darwin.add_species("t", trap);
+    
+    string species_name(1, 'r');
+    darwin.add_creature(species_name, 4, 4, 's');
+    string species_name1(1, 't');
+    darwin.add_creature(species_name1, 4, 2, 'w');
+    string species_name2(1, 'f');
+    darwin.add_creature(species_name2, 2, 5, 'n');
+
+    darwin.simulate(921, 182);
+
+    ASSERT_EQ(truth1, truth2);
 }
