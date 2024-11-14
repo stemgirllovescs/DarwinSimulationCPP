@@ -123,6 +123,9 @@ endif
 ctd-generate:
 	$(CHECKTESTDATA) -g Darwin.ctd.txt >> Darwin.tmp.txt
 
+Darwin-out:
+	run_Darwin < karahphang-Darwin.in.txt > Darwin.out.txt
+
 test-generate: 
 	-$(CPPCHECK) generateTestCases.cpp
 	$(CXX) $(CXXFLAGS) generateTestCases.cpp -o darwin $(LDFLAGS)
