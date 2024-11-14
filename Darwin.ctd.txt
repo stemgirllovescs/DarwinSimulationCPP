@@ -1,0 +1,20 @@
+# https://github.com/DOMjudge/checktestdata/blob/main/doc/format-spec.md
+
+INT(1, 200, t) NEWLINE
+REP(t)
+    NEWLINE
+    INT(1, 200, r) SPACE
+    INT(1, 200, c) NEWLINE
+
+    INT(1, 200, n) NEWLINE
+
+    REP(n)
+        REGEX("[frht]") SPACE
+        INT(0, r-1) SPACE
+        INT(0, c-1) SPACE
+        REGEX("[nsew]") NEWLINE
+    END
+
+    INT(1, 2000) SPACE
+    INT(1, 200) NEWLINE
+END
