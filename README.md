@@ -14,4 +14,4 @@
 
 * Actual completion time: 15 hours
 
-* Comments: I think the only reason I'm failing the pipeline for the in and out file is a newline difference because that's the only difference I could find when I ran "make run-all" on my device
+* Comments: I think the only reason I'm failing the pipeline for the in and out file is a newline difference because that's the only difference I could find when I ran "make run-all" on my device. I also don't know my partner's EID but they may add it later.
