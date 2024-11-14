@@ -40,9 +40,7 @@ public:
     }
 
     // returns the set of instructions
-    const vector<Instruction>& get_program() const {
-        return program;
-    }
+    const vector<Instruction>& get_program() const { return program; }
 
 private:
     vector<Instruction> program;
@@ -54,19 +52,15 @@ public:
 
     // initializes with a species name, it's individual pointer to the species' instruction, and a cahracter for
     // the direction
-    Creature(const string& species_name, const Species* sp, char dir)
-        : species_type(species_name), species(sp), direction(dir),
+    Creature(const string& species_name, const Species* sp, char dir) 
+        : species_type(species_name), species(sp), direction(dir), 
           program_counter(0), last_moved_turn(-1) {}
 
     bool execute_turn(Darwin& world, int row, int col, int current_turn);
 
     // gets the information for the species type and direction
-    string get_species_type() const {
-        return species_type;
-    }
-    char get_direction() const {
-        return direction;
-    }
+    string get_species_type() const { return species_type; }
+    char get_direction() const { return direction; }
 
     // to change the species upon infection
     void set_species(const std::string& new_species_name, const Species* new_species) {
@@ -155,7 +149,7 @@ public:
 
     // printing for testing purposes
     void print_offgrid(int turn) const {
-
+        
         // vector<vector<string>> grid;
         cout << "Turn = " << turn << "." << endl;
         cout << "  ";
@@ -239,7 +233,7 @@ void Creature::get_forward_position(int row, int col, int& next_row, int& next_c
 bool Creature::can_move_forward(const Darwin& world, int row, int col) const {
     int next_row, next_col;
     get_forward_position(row, col, next_row, next_col);
-    return world.is_valid_position(next_row, next_col) &&
+    return world.is_valid_position(next_row, next_col) && 
            world.get_creature(next_row, next_col) == nullptr;
 }
 
@@ -267,75 +261,75 @@ bool Creature::execute_turn(Darwin& world, int row, int col, int current_turn) {
         // checks through the different instruction types (enums) and executes the appropriate one
         // for the creature using the program counter
         const Instruction& inst = species->get_program()[program_counter];
-
+        
         switch (inst.type) {
-        case Instruction::HOP: {
-            if (can_move_forward(world, row, col)) {
+            case Instruction::HOP: {
+                if (can_move_forward(world, row, col)) {
+                    int next_row, next_col;
+                    get_forward_position(row, col, next_row, next_col);
+                    world.move_creature(row, col, next_row, next_col);
+                }
+                took_action = true;
+                break;
+            }
+
+            case Instruction::LEFT:
+                turn_left();
+                took_action = true;
+                break;
+
+            case Instruction::RIGHT:
+                turn_right();
+                took_action = true;
+                break;
+
+            case Instruction::INFECT: {
                 int next_row, next_col;
                 get_forward_position(row, col, next_row, next_col);
-                world.move_creature(row, col, next_row, next_col);
+                if (is_enemy_ahead(world, row, col)) {
+                    Creature* enemy = world.get_creature(next_row, next_col);
+                    enemy->set_species(species_type, species);
+                }
+                took_action = true;
+                break;
             }
-            took_action = true;
-            break;
-        }
 
-        case Instruction::LEFT:
-            turn_left();
-            took_action = true;
-            break;
 
-        case Instruction::RIGHT:
-            turn_right();
-            took_action = true;
-            break;
 
-        case Instruction::INFECT: {
-            int next_row, next_col;
-            get_forward_position(row, col, next_row, next_col);
-            if (is_enemy_ahead(world, row, col)) {
-                Creature* enemy = world.get_creature(next_row, next_col);
-                enemy->set_species(species_type, species);
+            case Instruction::IF_EMPTY:
+                if (can_move_forward(world, row, col)) {
+                    program_counter = inst.param;
+                    continue;
+                }
+                break;
+
+            case Instruction::IF_WALL: {
+                int next_row, next_col;
+                get_forward_position(row, col, next_row, next_col);
+                if (!world.is_valid_position(next_row, next_col)) {
+                    program_counter = inst.param;
+                    continue;
+                }
+                break;
             }
-            took_action = true;
-            break;
-        }
 
+            case Instruction::IF_RANDOM:
+                if (rand() % 2) {
+                    program_counter = inst.param;
+                    continue;
+                }
+                break;
 
+            case Instruction::IF_ENEMY:
+                if (is_enemy_ahead(world, row, col)) {
+                    program_counter = inst.param;
+                    continue;
+                }
+                break;
 
-        case Instruction::IF_EMPTY:
-            if (can_move_forward(world, row, col)) {
+            case Instruction::GO:
                 program_counter = inst.param;
                 continue;
-            }
-            break;
-
-        case Instruction::IF_WALL: {
-            int next_row, next_col;
-            get_forward_position(row, col, next_row, next_col);
-            if (!world.is_valid_position(next_row, next_col)) {
-                program_counter = inst.param;
-                continue;
-            }
-            break;
-        }
-
-        case Instruction::IF_RANDOM:
-            if (rand() % 2) {
-                program_counter = inst.param;
-                continue;
-            }
-            break;
-
-        case Instruction::IF_ENEMY:
-            if (is_enemy_ahead(world, row, col)) {
-                program_counter = inst.param;
-                continue;
-            }
-            break;
-
-        case Instruction::GO:
-            program_counter = inst.param;
-            continue;
         }
 
         // Increment program counter and wrap around if necessary

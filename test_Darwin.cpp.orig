@@ -47,14 +47,14 @@ TEST (DarwinRun, test0)
     trap.add_instruction(Instruction::INFECT);
     trap.add_instruction(Instruction::GO, 0);
 
-
+    
     darwin.add_species("f", food);
     darwin.add_species("h", hopper);
     darwin.add_species("r", rover);
     darwin.add_species("t", trap);
 
     string species_name(1, 't');
-    darwin.add_creature(species_name, 0, 1, 'w');
+    darwin.add_creature(species_name, 0, 1, 'w');    
 
     darwin.simulate(2, 1);
 
@@ -110,15 +110,15 @@ TEST (DarwinRun, test1)
     string species_name4(1, 't');
     darwin.add_creature(species_name4, 51, 48, 's');
     string species_name5(1, 'f');
-    darwin.add_creature(species_name5, 95, 64, 'w');
+    darwin.add_creature(species_name5, 95, 64, 'w'); 
     string species_name6(1, 'r');
-    darwin.add_creature(species_name6, 90, 1, 'n');
+    darwin.add_creature(species_name6, 90, 1, 'n'); 
     string species_name7(1, 'h');
     darwin.add_creature(species_name7, 102, 27, 'n');
     string species_name8(1, 'f');
     darwin.add_creature(species_name8, 55, 54, 'w');
     string species_name9(1, 'r');
-    darwin.add_creature(species_name9, 86, 51, 'w');
+    darwin.add_creature(species_name9, 86, 51, 'w');    
     string species_name10(1, 'r');
     darwin.add_creature(species_name10, 41, 53, 's');
     string species_name11(1, 't');
@@ -230,7 +230,7 @@ TEST (DarwinRun, test3)
     darwin.add_species("h", hopper);
     darwin.add_species("r", rover);
     darwin.add_species("t", trap);
-
+    
     string species_name(1, 'r');
     darwin.add_creature(species_name, 4, 2, 'w');
     string species_name1(1, 'h');
@@ -280,7 +280,7 @@ TEST (DarwinRun, test4)
     darwin.add_species("h", hopper);
     darwin.add_species("r", rover);
     darwin.add_species("t", trap);
-
+    
     string species_name(1, 't');
     darwin.add_creature(species_name, 4, 1, 'w');
     string species_name1(1, 't');
@@ -330,7 +330,7 @@ TEST (DarwinRun, test5)
     darwin.add_species("h", hopper);
     darwin.add_species("r", rover);
     darwin.add_species("t", trap);
-
+    
     string species_name(1, 'h');
     darwin.add_creature(species_name, 4, 2, 'e');
     string species_name1(1, 'h');
@@ -380,7 +380,7 @@ TEST (DarwinRun, test6)
     darwin.add_species("h", hopper);
     darwin.add_species("r", rover);
     darwin.add_species("t", trap);
-
+    
     string species_name(1, 'h');
     darwin.add_creature(species_name, 0, 4, 'n');
     string species_name1(1, 'f');
@@ -430,7 +430,7 @@ TEST (DarwinRun, test7)
     darwin.add_species("h", hopper);
     darwin.add_species("r", rover);
     darwin.add_species("t", trap);
-
+    
     string species_name(1, 't');
     darwin.add_creature(species_name, 1, 1, 'n');
     string species_name1(1, 'h');
@@ -480,7 +480,7 @@ TEST (DarwinRun, test8)
     darwin.add_species("h", hopper);
     darwin.add_species("r", rover);
     darwin.add_species("t", trap);
-
+    
     string species_name(1, 'h');
     darwin.add_creature(species_name, 0, 1, 'w');
     string species_name1(1, 'r');
@@ -530,7 +530,7 @@ TEST (DarwinRun, test9)
     darwin.add_species("h", hopper);
     darwin.add_species("r", rover);
     darwin.add_species("t", trap);
-
+    
     string species_name(1, 'r');
     darwin.add_creature(species_name, 4, 4, 's');
     string species_name1(1, 't');

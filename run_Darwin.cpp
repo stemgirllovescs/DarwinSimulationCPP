@@ -14,6 +14,7 @@ class Species;
 class Darwin;
 
 int main() {
+    // provides all the instructions for the specific darwin cases provided
     Species food, hopper, rover, trap;
 
     food.add_instruction(Instruction::LEFT);
@@ -50,6 +51,7 @@ int main() {
         int rows, cols;
         cin >> rows >> cols;
 
+        // creates the board and the species possible
         Darwin darwin(rows, cols);
 
         darwin.add_species("f", food);
@@ -64,7 +66,7 @@ int main() {
             int row, col;
             char dir;
             cin >> type >> row >> col >> dir;
-
+            // makes the specific creatures obtained from the in txt
             string species_name(1, type);
             darwin.add_creature(species_name, row, col, dir);
         }
@@ -72,6 +74,7 @@ int main() {
         int turns, freq;
         cin >> turns >> freq;
 
+        // simulates the turns and prints at whatever frequency provided
         darwin.simulate(turns, freq);
     }
 

@@ -1,0 +1,354 @@
+\doxysection{Darwin.\+hpp}
+\hypertarget{Darwin_8hpp_source}{}\label{Darwin_8hpp_source}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ Darwin\_hpp}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ Darwin\_hpp}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <map>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <cstdlib>}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{keyword}{using\ namespace\ }std;}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{comment}{//\ Forward\ declarations}}
+\DoxyCodeLine{00013\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classCreature}{Creature}};}
+\DoxyCodeLine{00014\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classSpecies}{Species}};}
+\DoxyCodeLine{00015\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classDarwin}{Darwin}};}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{comment}{//\ Instruction\ class\ to\ represent\ each\ instruction\ in\ a\ species\ program}}
+\DoxyCodeLine{00018\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classInstruction}{Instruction}}\ \{}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{comment}{//\ the\ different\ types\ of\ instructions\ to\ know\ what\ to\ do\ next\ by\ category}}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keyword}{enum}\ Type\ \{\ HOP,\ LEFT,\ RIGHT,\ INFECT,\ IF\_EMPTY,\ IF\_WALL,\ IF\_RANDOM,\ IF\_ENEMY,\ GO\ \};}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{comment}{//\ takes\ in\ an\ enum\ type\ and\ a\ parameter}}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{comment}{//\ doesn't\ make\ an\ extra\ copy}}
+\DoxyCodeLine{00026\ \ \ \ \ \mbox{\hyperlink{classInstruction}{Instruction}}(Type\ t,\ \textcolor{keywordtype}{int}\ n\ =\ 0)\ :\ type(t),\ param(n)\ \{\}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \ \ \ \ Type\ type;}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordtype}{int}\ param;}
+\DoxyCodeLine{00030\ \};}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \textcolor{comment}{//\ Species\ class\ to\ represent\ a\ type\ of\ creature\ and\ its\ program}}
+\DoxyCodeLine{00033\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classSpecies}{Species}}\ \{}
+\DoxyCodeLine{00034\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{comment}{//\ dafault\ constructor}}
+\DoxyCodeLine{00036\ \ \ \ \ \mbox{\hyperlink{classSpecies}{Species}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{void}\ add\_instruction(Instruction::Type\ type,\ \textcolor{keywordtype}{int}\ param\ =\ 0)\ \{}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ program.push\_back(\mbox{\hyperlink{classInstruction}{Instruction}}(type,\ param));}
+\DoxyCodeLine{00040\ \ \ \ \ \}}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{comment}{//\ returns\ the\ set\ of\ instructions}}
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keyword}{const}\ vector<Instruction>\&\ get\_program()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ program;}
+\DoxyCodeLine{00045\ \ \ \ \ \}}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00048\ \ \ \ \ vector<Instruction>\ program;}
+\DoxyCodeLine{00049\ \};}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \textcolor{comment}{//\ an\ individual\ creature\ of\ some\ sort\ of\ Species}}
+\DoxyCodeLine{00052\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classCreature}{Creature}}\ \{}
+\DoxyCodeLine{00053\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{comment}{//\ initializes\ with\ a\ species\ name,\ it's\ individual\ pointer\ to\ the\ species'\ instruction,\ and\ a\ cahracter\ for}}
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{comment}{//\ the\ direction}}
+\DoxyCodeLine{00057\ \ \ \ \ \mbox{\hyperlink{classCreature}{Creature}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\&\ species\_name,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classSpecies}{Species}}*\ sp,\ \textcolor{keywordtype}{char}\ dir)}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ :\ species\_type(species\_name),\ species(sp),\ direction(dir),}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \ \ program\_counter(0),\ last\_moved\_turn(-\/1)\ \{\}}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordtype}{bool}\ execute\_turn(\mbox{\hyperlink{classDarwin}{Darwin}}\&\ world,\ \textcolor{keywordtype}{int}\ row,\ \textcolor{keywordtype}{int}\ col,\ \textcolor{keywordtype}{int}\ current\_turn);}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{comment}{//\ gets\ the\ information\ for\ the\ species\ type\ and\ direction}}
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keywordtype}{string}\ get\_species\_type()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ species\_type;}
+\DoxyCodeLine{00066\ \ \ \ \ \}}
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keywordtype}{char}\ get\_direction()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ direction;}
+\DoxyCodeLine{00069\ \ \ \ \ \}}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{comment}{//\ to\ change\ the\ species\ upon\ infection}}
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keywordtype}{void}\ set\_species(\textcolor{keyword}{const}\ std::string\&\ new\_species\_name,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classSpecies}{Species}}*\ new\_species)\ \{}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ species\_type\ =\ new\_species\_name;}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ species\ =\ new\_species;}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ program\_counter\ =\ 0;}
+\DoxyCodeLine{00076\ \ \ \ \ \}}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00078\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keywordtype}{string}\ species\_type;}
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classSpecies}{Species}}*\ species;}
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{keywordtype}{char}\ direction;}
+\DoxyCodeLine{00082\ \ \ \ \ \textcolor{keywordtype}{int}\ program\_counter;}
+\DoxyCodeLine{00083\ \ \ \ \ \textcolor{keywordtype}{int}\ last\_moved\_turn;}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00085\ \ \ \ \ \textcolor{keywordtype}{void}\ turn\_left();}
+\DoxyCodeLine{00086\ \ \ \ \ \textcolor{keywordtype}{void}\ turn\_right();}
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keywordtype}{bool}\ can\_move\_forward(\textcolor{keyword}{const}\ \mbox{\hyperlink{classDarwin}{Darwin}}\&\ world,\ \textcolor{keywordtype}{int}\ row,\ \textcolor{keywordtype}{int}\ col)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00088\ \ \ \ \ \textcolor{keywordtype}{void}\ get\_forward\_position(\textcolor{keywordtype}{int}\ row,\ \textcolor{keywordtype}{int}\ col,\ \textcolor{keywordtype}{int}\&\ next\_row,\ \textcolor{keywordtype}{int}\&\ next\_col)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00089\ \ \ \ \ \textcolor{keywordtype}{bool}\ is\_enemy\_ahead(\textcolor{keyword}{const}\ \mbox{\hyperlink{classDarwin}{Darwin}}\&\ world,\ \textcolor{keywordtype}{int}\ row,\ \textcolor{keywordtype}{int}\ col)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00090\ \};}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00092\ \textcolor{comment}{//\ the\ main\ program\ for\ Darwin}}
+\DoxyCodeLine{00093\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classDarwin}{Darwin}}\ \{}
+\DoxyCodeLine{00094\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00096\ \ \ \ \ \textcolor{comment}{//\ to\ initialize\ the\ board\ "{}pseudo-\/randomly"{}}}
+\DoxyCodeLine{00097\ \ \ \ \ \mbox{\hyperlink{classDarwin}{Darwin}}(\textcolor{keywordtype}{int}\ r,\ \textcolor{keywordtype}{int}\ c)\ :\ rows(r),\ cols(c),\ grid(r,\ vector<Creature*>(c,\ \textcolor{keyword}{nullptr}))\ \{}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ srand(0);}
+\DoxyCodeLine{00099\ \ \ \ \ \}}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00101\ \ \ \ \ \textcolor{comment}{//\ add\ species\ to\ the\ Darwin\ that\ is\ able\ to\ pop\ up\ or\ not}}
+\DoxyCodeLine{00102\ \ \ \ \ \textcolor{keywordtype}{void}\ add\_species(\textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\&\ name,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classSpecies}{Species}}\&\ species)\ \{}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ species\_map[name]\ =\ species;}
+\DoxyCodeLine{00104\ \ \ \ \ \}}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00106\ \ \ \ \ \textcolor{comment}{//\ add\ a\ creature\ to\ the\ board,\ and\ given\ a\ default\ orientation}}
+\DoxyCodeLine{00107\ \ \ \ \ \textcolor{keywordtype}{void}\ add\_creature(\textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\&\ species\_name,\ \textcolor{keywordtype}{int}\ row,\ \textcolor{keywordtype}{int}\ col,\ \textcolor{keywordtype}{char}\ dir)\ \{}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (row\ >=\ 0\ \&\&\ row\ <\ rows\ \&\&\ col\ >=\ 0\ \&\&\ col\ <\ cols)\ \{}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{delete}\ grid[row][col];}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \ \ \ \ grid[row][col]\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classCreature}{Creature}}(species\_name,\ \&species\_map[species\_name],\ dir);}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00112\ \ \ \ \ \}}
+\DoxyCodeLine{00113\ }
+\DoxyCodeLine{00114\ \ \ \ \ \textcolor{comment}{//\ runs\ the\ basis\ of\ the\ simulation\ for\ the\ board\ given\ how\ many\ turns}}
+\DoxyCodeLine{00115\ \ \ \ \ \textcolor{comment}{//\ and\ how\ frequently\ it\ wants\ to\ be\ printed}}
+\DoxyCodeLine{00116\ \ \ \ \ \textcolor{keywordtype}{void}\ simulate(\textcolor{keywordtype}{int}\ turns,\ \textcolor{keywordtype}{int}\ freq)\ \{}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}***\ Darwin\ "{}}\ <<\ rows\ <<\ \textcolor{stringliteral}{"{}x"{}}\ <<\ cols\ <<\ \textcolor{stringliteral}{"{}\ ***"{}}\ <<\ endl;}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ print\_grid(0);}
+\DoxyCodeLine{00119\ }
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ turn\ =\ 1;\ turn\ <=\ turns;\ turn++)\ \{}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ rows;\ i++)\ \{}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j\ =\ 0;\ j\ <\ cols;\ j++)\ \{}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (grid[i][j])\ \{}
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ grid[i][j]-\/>execute\_turn(*\textcolor{keyword}{this},\ i,\ j,\ turn);}
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00128\ }
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (turn\ \%\ freq\ ==\ 0)\ \{}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ print\_grid(turn);}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00133\ \ \ \ \ \}}
+\DoxyCodeLine{00134\ }
+\DoxyCodeLine{00135\ \ \ \ \ \textcolor{comment}{//\ checks\ if\ the\ propsed\ row\ and\ column\ exists\ on\ the\ board}}
+\DoxyCodeLine{00136\ \ \ \ \ \textcolor{keywordtype}{bool}\ is\_valid\_position(\textcolor{keywordtype}{int}\ row,\ \textcolor{keywordtype}{int}\ col)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ row\ >=\ 0\ \&\&\ row\ <\ rows\ \&\&\ col\ >=\ 0\ \&\&\ col\ <\ cols;}
+\DoxyCodeLine{00138\ \ \ \ \ \}}
+\DoxyCodeLine{00139\ }
+\DoxyCodeLine{00140\ \ \ \ \ \textcolor{comment}{//\ gets\ a\ local\ lil\ critter}}
+\DoxyCodeLine{00141\ \ \ \ \ \mbox{\hyperlink{classCreature}{Creature}}*\ get\_creature(\textcolor{keywordtype}{int}\ row,\ \textcolor{keywordtype}{int}\ col)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (is\_valid\_position(row,\ col))\ \{}
+\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ grid[row][col];}
+\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00146\ \ \ \ \ \}}
+\DoxyCodeLine{00147\ }
+\DoxyCodeLine{00148\ \ \ \ \ \textcolor{comment}{//\ moves\ the\ creature\ from\ one\ space\ to\ another\ if\ the\ position\ is\ valid}}
+\DoxyCodeLine{00149\ \ \ \ \ \textcolor{keywordtype}{void}\ move\_creature(\textcolor{keywordtype}{int}\ from\_row,\ \textcolor{keywordtype}{int}\ from\_col,\ \textcolor{keywordtype}{int}\ to\_row,\ \textcolor{keywordtype}{int}\ to\_col)\ \{}
+\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (is\_valid\_position(from\_row,\ from\_col)\ \&\&\ is\_valid\_position(to\_row,\ to\_col))\ \{}
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ \ \ \ \ grid[to\_row][to\_col]\ =\ grid[from\_row][from\_col];}
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ \ \ \ \ grid[from\_row][from\_col]\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00154\ \ \ \ \ \}}
+\DoxyCodeLine{00155\ }
+\DoxyCodeLine{00156\ \ \ \ \ \textcolor{comment}{//\ printing\ for\ testing\ purposes}}
+\DoxyCodeLine{00157\ \ \ \ \ \textcolor{keywordtype}{void}\ print\_offgrid(\textcolor{keywordtype}{int}\ turn)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00158\ }
+\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ vector<vector<string>>\ grid;}}
+\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}Turn\ =\ "{}}\ <<\ turn\ <<\ \textcolor{stringliteral}{"{}."{}}\ <<\ endl;}
+\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}\ \ "{}};}
+\DoxyCodeLine{00162\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j\ =\ 0;\ j\ <\ cols;\ j++)\ \{}
+\DoxyCodeLine{00163\ \ \ \ \ \ \ \ \ \ \ \ \ cout\ <<\ j\ \%\ 10;}
+\DoxyCodeLine{00164\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00165\ \ \ \ \ \ \ \ \ cout\ <<\ endl;}
+\DoxyCodeLine{00166\ }
+\DoxyCodeLine{00167\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ rows;\ i++)\ \{}
+\DoxyCodeLine{00168\ \ \ \ \ \ \ \ \ \ \ \ \ cout\ <<\ i\ \%\ 10\ <<\ \textcolor{stringliteral}{"{}\ "{}};}
+\DoxyCodeLine{00169\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j\ =\ 0;\ j\ <\ cols;\ j++)\ \{}
+\DoxyCodeLine{00170\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cout\ <<\ (grid[i][j]\ ?\ grid[i][j]-\/>get\_species\_type()[0]\ :\ \textcolor{charliteral}{'.'});}
+\DoxyCodeLine{00171\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00172\ \ \ \ \ \ \ \ \ \ \ \ \ cout\ <<\ endl;}
+\DoxyCodeLine{00173\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00174\ \ \ \ \ \ \ \ \ cout\ <<\ endl;}
+\DoxyCodeLine{00175\ \ \ \ \ \}}
+\DoxyCodeLine{00176\ }
+\DoxyCodeLine{00177\ \ \ \ \ \textcolor{comment}{//\ cleans\ up\ the\ board}}
+\DoxyCodeLine{00178\ \ \ \ \ \mbox{\hyperlink{classDarwin}{\string~Darwin}}()\ \{}
+\DoxyCodeLine{00179\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\&\ row\ :\ grid)\ \{}
+\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\ creature\ :\ row)\ \{}
+\DoxyCodeLine{00181\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{delete}\ creature;}
+\DoxyCodeLine{00182\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00183\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00184\ \ \ \ \ \}}
+\DoxyCodeLine{00185\ }
+\DoxyCodeLine{00186\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00187\ }
+\DoxyCodeLine{00188\ \ \ \ \ \textcolor{comment}{//\ prints\ the\ grid}}
+\DoxyCodeLine{00189\ \ \ \ \ \textcolor{keywordtype}{int}\ rows,\ cols;}
+\DoxyCodeLine{00190\ \ \ \ \ vector<vector<Creature*>>\ grid;}
+\DoxyCodeLine{00191\ \ \ \ \ map<string,\ Species>\ species\_map;}
+\DoxyCodeLine{00192\ }
+\DoxyCodeLine{00193\ \ \ \ \ \textcolor{keywordtype}{void}\ print\_grid(\textcolor{keywordtype}{int}\ turn)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00194\ \ \ \ \ \ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}Turn\ =\ "{}}\ <<\ turn\ <<\ \textcolor{stringliteral}{"{}."{}}\ <<\ endl;}
+\DoxyCodeLine{00195\ \ \ \ \ \ \ \ \ cout\ <<\ \textcolor{stringliteral}{"{}\ \ "{}};}
+\DoxyCodeLine{00196\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j\ =\ 0;\ j\ <\ cols;\ j++)\ \{}
+\DoxyCodeLine{00197\ \ \ \ \ \ \ \ \ \ \ \ \ cout\ <<\ j\ \%\ 10;}
+\DoxyCodeLine{00198\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00199\ \ \ \ \ \ \ \ \ cout\ <<\ endl;}
+\DoxyCodeLine{00200\ }
+\DoxyCodeLine{00201\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ rows;\ i++)\ \{}
+\DoxyCodeLine{00202\ \ \ \ \ \ \ \ \ \ \ \ \ cout\ <<\ i\ \%\ 10\ <<\ \textcolor{stringliteral}{"{}\ "{}};}
+\DoxyCodeLine{00203\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ j\ =\ 0;\ j\ <\ cols;\ j++)\ \{}
+\DoxyCodeLine{00204\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cout\ <<\ (grid[i][j]\ ?\ grid[i][j]-\/>get\_species\_type()[0]\ :\ \textcolor{charliteral}{'.'});}
+\DoxyCodeLine{00205\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00206\ \ \ \ \ \ \ \ \ \ \ \ \ cout\ <<\ endl;}
+\DoxyCodeLine{00207\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00208\ \ \ \ \ \ \ \ \ cout\ <<\ endl;}
+\DoxyCodeLine{00209\ \ \ \ \ \}}
+\DoxyCodeLine{00210\ \};}
+\DoxyCodeLine{00211\ }
+\DoxyCodeLine{00212\ \textcolor{comment}{//\ these\ changes\ the\ orientation\ of\ the\ creature\ and\ marks\ it\ accordingly}}
+\DoxyCodeLine{00213\ \textcolor{keywordtype}{void}\ Creature::turn\_left()\ \{}
+\DoxyCodeLine{00214\ \ \ \ \ \textcolor{keywordflow}{if}\ (direction\ ==\ \textcolor{charliteral}{'n'})\ direction\ =\ \textcolor{charliteral}{'w'};}
+\DoxyCodeLine{00215\ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (direction\ ==\ \textcolor{charliteral}{'w'})\ direction\ =\ \textcolor{charliteral}{'s'};}
+\DoxyCodeLine{00216\ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (direction\ ==\ \textcolor{charliteral}{'s'})\ direction\ =\ \textcolor{charliteral}{'e'};}
+\DoxyCodeLine{00217\ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (direction\ ==\ \textcolor{charliteral}{'e'})\ direction\ =\ \textcolor{charliteral}{'n'};}
+\DoxyCodeLine{00218\ \}}
+\DoxyCodeLine{00219\ }
+\DoxyCodeLine{00220\ \textcolor{keywordtype}{void}\ Creature::turn\_right()\ \{}
+\DoxyCodeLine{00221\ \ \ \ \ \textcolor{keywordflow}{if}\ (direction\ ==\ \textcolor{charliteral}{'n'})\ direction\ =\ \textcolor{charliteral}{'e'};}
+\DoxyCodeLine{00222\ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (direction\ ==\ \textcolor{charliteral}{'e'})\ direction\ =\ \textcolor{charliteral}{'s'};}
+\DoxyCodeLine{00223\ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (direction\ ==\ \textcolor{charliteral}{'s'})\ direction\ =\ \textcolor{charliteral}{'w'};}
+\DoxyCodeLine{00224\ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (direction\ ==\ \textcolor{charliteral}{'w'})\ direction\ =\ \textcolor{charliteral}{'n'};}
+\DoxyCodeLine{00225\ \}}
+\DoxyCodeLine{00226\ }
+\DoxyCodeLine{00227\ \textcolor{comment}{//\ gets\ the\ next\ position\ based\ on\ what\ direction\ it's\ facing}}
+\DoxyCodeLine{00228\ \textcolor{keywordtype}{void}\ Creature::get\_forward\_position(\textcolor{keywordtype}{int}\ row,\ \textcolor{keywordtype}{int}\ col,\ \textcolor{keywordtype}{int}\&\ next\_row,\ \textcolor{keywordtype}{int}\&\ next\_col)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00229\ \ \ \ \ next\_row\ =\ row;}
+\DoxyCodeLine{00230\ \ \ \ \ next\_col\ =\ col;}
+\DoxyCodeLine{00231\ }
+\DoxyCodeLine{00232\ \ \ \ \ \textcolor{keywordflow}{if}\ (direction\ ==\ \textcolor{charliteral}{'n'})\ next\_row-\/-\/;}
+\DoxyCodeLine{00233\ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (direction\ ==\ \textcolor{charliteral}{'s'})\ next\_row++;}
+\DoxyCodeLine{00234\ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (direction\ ==\ \textcolor{charliteral}{'e'})\ next\_col++;}
+\DoxyCodeLine{00235\ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (direction\ ==\ \textcolor{charliteral}{'w'})\ next\_col-\/-\/;}
+\DoxyCodeLine{00236\ \}}
+\DoxyCodeLine{00237\ }
+\DoxyCodeLine{00238\ \textcolor{comment}{//\ checks\ if\ the\ position\ it\ wants\ to\ move\ forward\ in\ is\ a\ valid\ place\ to\ move}}
+\DoxyCodeLine{00239\ \textcolor{keywordtype}{bool}\ Creature::can\_move\_forward(\textcolor{keyword}{const}\ \mbox{\hyperlink{classDarwin}{Darwin}}\&\ world,\ \textcolor{keywordtype}{int}\ row,\ \textcolor{keywordtype}{int}\ col)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00240\ \ \ \ \ \textcolor{keywordtype}{int}\ next\_row,\ next\_col;}
+\DoxyCodeLine{00241\ \ \ \ \ get\_forward\_position(row,\ col,\ next\_row,\ next\_col);}
+\DoxyCodeLine{00242\ \ \ \ \ \textcolor{keywordflow}{return}\ world.is\_valid\_position(next\_row,\ next\_col)\ \&\&}
+\DoxyCodeLine{00243\ \ \ \ \ \ \ \ \ \ \ \ world.get\_creature(next\_row,\ next\_col)\ ==\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00244\ \}}
+\DoxyCodeLine{00245\ }
+\DoxyCodeLine{00246\ \textcolor{comment}{//\ checks\ if\ there's\ an\ 'enemy'\ in\ front\ of\ the\ creature\ based\ on\ what\ direction\ it's}}
+\DoxyCodeLine{00247\ \textcolor{comment}{//\ facing}}
+\DoxyCodeLine{00248\ \textcolor{keywordtype}{bool}\ Creature::is\_enemy\_ahead(\textcolor{keyword}{const}\ \mbox{\hyperlink{classDarwin}{Darwin}}\&\ world,\ \textcolor{keywordtype}{int}\ row,\ \textcolor{keywordtype}{int}\ col)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00249\ \ \ \ \ \textcolor{keywordtype}{int}\ next\_row,\ next\_col;}
+\DoxyCodeLine{00250\ \ \ \ \ get\_forward\_position(row,\ col,\ next\_row,\ next\_col);}
+\DoxyCodeLine{00251\ }
+\DoxyCodeLine{00252\ \ \ \ \ \textcolor{keywordflow}{if}\ (!world.is\_valid\_position(next\_row,\ next\_col))\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00253\ }
+\DoxyCodeLine{00254\ \ \ \ \ \mbox{\hyperlink{classCreature}{Creature}}*\ ahead\ =\ world.get\_creature(next\_row,\ next\_col);}
+\DoxyCodeLine{00255\ \ \ \ \ \textcolor{keywordflow}{return}\ ahead\ \&\&\ ahead-\/>get\_species\_type()\ !=\ species\_type;}
+\DoxyCodeLine{00256\ \}}
+\DoxyCodeLine{00257\ }
+\DoxyCodeLine{00258\ \textcolor{comment}{//\ checks\ if\ a\ creature\ has\ had\ its\ turn}}
+\DoxyCodeLine{00259\ \textcolor{keywordtype}{bool}\ Creature::execute\_turn(\mbox{\hyperlink{classDarwin}{Darwin}}\&\ world,\ \textcolor{keywordtype}{int}\ row,\ \textcolor{keywordtype}{int}\ col,\ \textcolor{keywordtype}{int}\ current\_turn)\ \{}
+\DoxyCodeLine{00260\ \ \ \ \ \textcolor{keywordflow}{if}\ (last\_moved\_turn\ ==\ current\_turn)\ \{}
+\DoxyCodeLine{00261\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};\ \ \textcolor{comment}{//\ Already\ moved\ this\ turn}}
+\DoxyCodeLine{00262\ \ \ \ \ \}}
+\DoxyCodeLine{00263\ }
+\DoxyCodeLine{00264\ \ \ \ \ \textcolor{keywordtype}{bool}\ took\_action\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00265\ \ \ \ \ \textcolor{keywordflow}{while}\ (!took\_action)\ \{}
+\DoxyCodeLine{00266\ }
+\DoxyCodeLine{00267\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ checks\ through\ the\ different\ instruction\ types\ (enums)\ and\ executes\ the\ appropriate\ one}}
+\DoxyCodeLine{00268\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ for\ the\ creature\ using\ the\ program\ counter}}
+\DoxyCodeLine{00269\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classInstruction}{Instruction}}\&\ inst\ =\ species-\/>get\_program()[program\_counter];}
+\DoxyCodeLine{00270\ }
+\DoxyCodeLine{00271\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (inst.type)\ \{}
+\DoxyCodeLine{00272\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ Instruction::HOP:\ \{}
+\DoxyCodeLine{00273\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (can\_move\_forward(world,\ row,\ col))\ \{}
+\DoxyCodeLine{00274\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ next\_row,\ next\_col;}
+\DoxyCodeLine{00275\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ get\_forward\_position(row,\ col,\ next\_row,\ next\_col);}
+\DoxyCodeLine{00276\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ world.move\_creature(row,\ col,\ next\_row,\ next\_col);}
+\DoxyCodeLine{00277\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00278\ \ \ \ \ \ \ \ \ \ \ \ \ took\_action\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00279\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00280\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00281\ }
+\DoxyCodeLine{00282\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ Instruction::LEFT:}
+\DoxyCodeLine{00283\ \ \ \ \ \ \ \ \ \ \ \ \ turn\_left();}
+\DoxyCodeLine{00284\ \ \ \ \ \ \ \ \ \ \ \ \ took\_action\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00285\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00286\ }
+\DoxyCodeLine{00287\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ Instruction::RIGHT:}
+\DoxyCodeLine{00288\ \ \ \ \ \ \ \ \ \ \ \ \ turn\_right();}
+\DoxyCodeLine{00289\ \ \ \ \ \ \ \ \ \ \ \ \ took\_action\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00290\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00291\ }
+\DoxyCodeLine{00292\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ Instruction::INFECT:\ \{}
+\DoxyCodeLine{00293\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ next\_row,\ next\_col;}
+\DoxyCodeLine{00294\ \ \ \ \ \ \ \ \ \ \ \ \ get\_forward\_position(row,\ col,\ next\_row,\ next\_col);}
+\DoxyCodeLine{00295\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (is\_enemy\_ahead(world,\ row,\ col))\ \{}
+\DoxyCodeLine{00296\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classCreature}{Creature}}*\ enemy\ =\ world.get\_creature(next\_row,\ next\_col);}
+\DoxyCodeLine{00297\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ enemy-\/>set\_species(species\_type,\ species);}
+\DoxyCodeLine{00298\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00299\ \ \ \ \ \ \ \ \ \ \ \ \ took\_action\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00300\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00301\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00302\ }
+\DoxyCodeLine{00303\ }
+\DoxyCodeLine{00304\ }
+\DoxyCodeLine{00305\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ Instruction::IF\_EMPTY:}
+\DoxyCodeLine{00306\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (can\_move\_forward(world,\ row,\ col))\ \{}
+\DoxyCodeLine{00307\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ program\_counter\ =\ inst.param;}
+\DoxyCodeLine{00308\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{00309\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00310\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00311\ }
+\DoxyCodeLine{00312\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ Instruction::IF\_WALL:\ \{}
+\DoxyCodeLine{00313\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ next\_row,\ next\_col;}
+\DoxyCodeLine{00314\ \ \ \ \ \ \ \ \ \ \ \ \ get\_forward\_position(row,\ col,\ next\_row,\ next\_col);}
+\DoxyCodeLine{00315\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!world.is\_valid\_position(next\_row,\ next\_col))\ \{}
+\DoxyCodeLine{00316\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ program\_counter\ =\ inst.param;}
+\DoxyCodeLine{00317\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{00318\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00319\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00320\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00321\ }
+\DoxyCodeLine{00322\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ Instruction::IF\_RANDOM:}
+\DoxyCodeLine{00323\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (rand()\ \%\ 2)\ \{}
+\DoxyCodeLine{00324\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ program\_counter\ =\ inst.param;}
+\DoxyCodeLine{00325\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{00326\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00327\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00328\ }
+\DoxyCodeLine{00329\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ Instruction::IF\_ENEMY:}
+\DoxyCodeLine{00330\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (is\_enemy\_ahead(world,\ row,\ col))\ \{}
+\DoxyCodeLine{00331\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ program\_counter\ =\ inst.param;}
+\DoxyCodeLine{00332\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{00333\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00334\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00335\ }
+\DoxyCodeLine{00336\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ Instruction::GO:}
+\DoxyCodeLine{00337\ \ \ \ \ \ \ \ \ \ \ \ \ program\_counter\ =\ inst.param;}
+\DoxyCodeLine{00338\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{00339\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00340\ }
+\DoxyCodeLine{00341\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Increment\ program\ counter\ and\ wrap\ around\ if\ necessary}}
+\DoxyCodeLine{00342\ \ \ \ \ \ \ \ \ program\_counter\ =\ (program\_counter\ +\ 1)\ \%\ species-\/>get\_program().size();}
+\DoxyCodeLine{00343\ \ \ \ \ \}}
+\DoxyCodeLine{00344\ }
+\DoxyCodeLine{00345\ \ \ \ \ last\_moved\_turn\ =\ current\_turn;}
+\DoxyCodeLine{00346\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00347\ \}}
+\DoxyCodeLine{00348\ }
+\DoxyCodeLine{00349\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ Darwin\_hpp}}
+
+\end{DoxyCode}
