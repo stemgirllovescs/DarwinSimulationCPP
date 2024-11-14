@@ -123,13 +123,13 @@ endif
 ctd-generate:
 	$(CHECKTESTDATA) -g Darwin.ctd.txt >> Darwin.tmp.txt
 
-Darwin-out:
-	run_Darwin < karahphang-Darwin.in.txt > Darwin.out.txt
+# Darwin-out:
+# 	run_Darwin < karahphang-Darwin.in.txt > Darwin.out.txt
 
-test-generate: 
-	-$(CPPCHECK) generateTestCases.cpp
-	$(CXX) $(CXXFLAGS) generateTestCases.cpp -o darwin $(LDFLAGS)
-	./darwin
+# test-generate: 
+# 	-$(CPPCHECK) generateTestCases.cpp
+# 	$(CXX) $(CXXFLAGS) generateTestCases.cpp -o darwin $(LDFLAGS)
+# 	./darwin
 
 # execute the run harness against your test files in the Darwin test repo and diff with the expected output
 # change gpdowning to your GitLab-ID

@@ -2,7 +2,7 @@
 
 * Name: Karah Phang and Katherine Liang
 
-* EID: kp33527 and 
+* EID: kp33527 and Xl5878
 
 * GitLab ID: karahphang and katherineliang100
 
