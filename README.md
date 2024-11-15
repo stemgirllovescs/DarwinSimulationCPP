@@ -6,12 +6,12 @@
 
 * GitLab ID: karahphang and katherineliang100
 
-* Git SHA: 95b88429dd3191a4232eacfc49d3a28397273333
+* Git SHA: 6626d6952b2a51220fce2a4221aa11715aa19b2c
 
-* GitLab Pipelines: https://gitlab.com/karahphang/cs371p-darwin-tests/-/jobs/8356814239 (pipeline for the darwin in and out)
+* GitLab Pipelines: (https://gitlab.com/karahphang/cs371p-darwin-tests/-/pipelines/1544743696)
 
 * Estimated completion time: 13 hours
 
-* Actual completion time: 15 hours
+* Actual completion time: 17 hours
 
-* Comments: I think the only reason I'm failing the pipeline for the in and out file is a newline difference because that's the only difference I could find when I ran "make run-all" on my device. 
+* Comments: 
