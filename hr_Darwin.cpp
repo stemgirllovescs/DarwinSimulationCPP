@@ -100,7 +100,13 @@ public:
                 }
             }
 
-            if (turn % freq == 0) {
+            // if (turn % freq == 0) {
+            //     print_grid(turn);
+            // }
+            // Don't print twice if it's both the final turn and a frequency interval
+            if (turn == turns) {
+                print_grid(turn);
+            } else if (turn % freq == 0 && turn < turns) {
                 print_grid(turn);
             }
         }
