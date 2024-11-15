@@ -113,9 +113,12 @@ public:
 
     // runs the basis of the simulation for the board given how many turns
     // and how frequently it wants to be printed
-    void simulate(int turns, int freq) {
+    void simulate(int turns, int freq, int numOfTests, int totalNumOfTests) {
         cout << "*** Darwin " << rows << "x" << cols << " ***" << endl;
-        print_grid(0);
+        print_grid(0, false, false);
+        // cout << "turns: " << turns << "\t frequency: " << freq << "\n";
+        int totalPrints = turns/freq;
+        int printing = 1;
 
         for (int turn = 1; turn <= turns; turn++) {
             for (int i = 0; i < rows; i++) {
@@ -126,8 +129,15 @@ public:
                 }
             }
 
+            // cout << "total prints: " << totalPrints << "\t printing int: " << printing << "\n";
+            bool toPrintEndline1 = (totalNumOfTests == (numOfTests+1));
+            bool toPrintEndline2 = (printing == (totalPrints));
+            // cout << "total prints equals the currenting printing tracker? " << toPrintEndline2 << "\n";
+            // cout << "testcases match? " << toPrintEndline1 << "\t last turn of simulation printing? " << toPrintEndline2 << "\n";
             if (turn % freq == 0) {
-                print_grid(turn);
+                // cout<< "total test cases: " << totalNumOfTests << "\t current testcase: " << numOfTests << "\n";
+                print_grid(turn, toPrintEndline1, toPrintEndline2);
+                printing++;
             }
         }
     }
@@ -169,7 +179,7 @@ private:
     vector<vector<Creature*>> grid;
     map<string, Species> species_map;
 
-    void print_grid(int turn) const {
+    void print_grid(int turn, bool lastTestCase, bool lastTurn) const {
         cout << "Turn = " << turn << "." << endl;
         cout << "  ";
         for (int j = 0; j < cols; j++) {
@@ -184,7 +194,11 @@ private:
             }
             cout << endl;
         }
-        cout << endl;
+        // cout << "is this last testcase? " << lastTestCase << "\t is this last turn of printing? " << lastTurn << "\n";
+        if (!lastTestCase || (!lastTurn && lastTestCase))
+        {
+            cout << endl;
+        }
     }
 };
 

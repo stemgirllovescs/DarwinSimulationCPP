@@ -56,7 +56,7 @@ TEST (DarwinRun, test0)
     string species_name(1, 't');
     darwin.add_creature(species_name, 0, 1, 'w');
 
-    darwin.simulate(2, 1);
+    darwin.simulate(2, 1, 1, 1);
 
     ASSERT_EQ(truth1, truth2);
 }
@@ -134,7 +134,7 @@ TEST (DarwinRun, test1)
     string species_name16(1, 'f');
     darwin.add_creature(species_name16, 49, 22, 'w');
 
-    darwin.simulate(482, 68);
+    darwin.simulate(482, 68, 1, 1);
 
     ASSERT_EQ(truth1, truth2);
 }
@@ -188,7 +188,7 @@ TEST(DarwinRun, test2)
     string species_name4(1, 'h');
     darwin.add_creature(species_name4, 3, 0, 'e');
 
-    darwin.simulate(1366, 1);
+    darwin.simulate(1366, 1, 1, 1);
 
     ASSERT_EQ(truth1, truth2);
 }
@@ -238,7 +238,7 @@ TEST (DarwinRun, test3)
     string species_name2(1, 'f');
     darwin.add_creature(species_name2, 1, 4, 'e');
 
-    darwin.simulate(1880, 185);
+    darwin.simulate(1880, 185, 1, 1);
 
     ASSERT_EQ(truth1, truth2);
 }
@@ -288,7 +288,7 @@ TEST (DarwinRun, test4)
     string species_name2(1, 'r');
     darwin.add_creature(species_name2, 4, 4, 's');
 
-    darwin.simulate(1958, 51);
+    darwin.simulate(1958, 51, 1, 1);
 
     ASSERT_EQ(truth1, truth2);
 }
@@ -338,7 +338,7 @@ TEST (DarwinRun, test5)
     string species_name2(1, 'f');
     darwin.add_creature(species_name2, 0, 0, 'n');
 
-    darwin.simulate(47, 148);
+    darwin.simulate(47, 148, 1, 1);
 
     ASSERT_EQ(truth1, truth2);
 }
@@ -388,7 +388,7 @@ TEST (DarwinRun, test6)
     string species_name2(1, 'h');
     darwin.add_creature(species_name2, 2, 4, 'n');
 
-    darwin.simulate(919, 136);
+    darwin.simulate(919, 136, 1, 1);
 
     ASSERT_EQ(truth1, truth2);
 }
@@ -438,7 +438,7 @@ TEST (DarwinRun, test7)
     string species_name2(1, 'r');
     darwin.add_creature(species_name2, 4, 4, 'w');
 
-    darwin.simulate(416, 87);
+    darwin.simulate(416, 87, 1, 1);
 
     ASSERT_EQ(truth1, truth2);
 }
@@ -488,7 +488,7 @@ TEST (DarwinRun, test8)
     string species_name2(1, 't');
     darwin.add_creature(species_name2, 1, 0, 'w');
 
-    darwin.simulate(754, 172);
+    darwin.simulate(754, 172, 1, 1);
 
     ASSERT_EQ(truth1, truth2);
 }
@@ -538,7 +538,7 @@ TEST (DarwinRun, test9)
     string species_name2(1, 'f');
     darwin.add_creature(species_name2, 2, 5, 'n');
 
-    darwin.simulate(921, 182);
+    darwin.simulate(921, 182, 1, 1);
 
     ASSERT_EQ(truth1, truth2);
 }

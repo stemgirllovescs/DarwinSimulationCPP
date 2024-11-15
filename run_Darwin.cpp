@@ -75,7 +75,7 @@ int main() {
         cin >> turns >> freq;
 
         // simulates the turns and prints at whatever frequency provided
-        darwin.simulate(turns, freq);
+        darwin.simulate(turns, freq, test, t);
     }
 
     return 0;
