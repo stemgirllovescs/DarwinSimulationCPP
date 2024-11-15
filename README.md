@@ -1,4 +1,4 @@
-# CS371p: Object-Oriented Programming Allocator Repo
+# CS371p: Object-Oriented Programming Darwin Repo
 
 * Name: Karah Phang and Katherine Liang
 
@@ -6,7 +6,7 @@
 
 * GitLab ID: karahphang and katherineliang100
 
-* Git SHA: 8e1ebd58e3ee4915f175fb3cca731d6aca9ca066
+* Git SHA: 95b88429dd3191a4232eacfc49d3a28397273333
 
 * GitLab Pipelines: https://gitlab.com/karahphang/cs371p-darwin-tests/-/jobs/8356814239 (pipeline for the darwin in and out)
 
