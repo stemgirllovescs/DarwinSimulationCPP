@@ -6,7 +6,7 @@
 
 * GitLab ID: karahphang and katherineliang100
 
-* Git SHA: 6626d6952b2a51220fce2a4221aa11715aa19b2c
+* Git SHA: 89344494ab271cf8920240e0edc7b5a7a57bc1d6
 
 * GitLab Pipelines: (https://gitlab.com/karahphang/cs371p-darwin-tests/-/pipelines/1544743696)
 
