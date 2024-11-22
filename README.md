@@ -8,7 +8,8 @@
 
 * Git SHA: 89344494ab271cf8920240e0edc7b5a7a57bc1d6
 
-* GitLab Pipelines: (https://gitlab.com/karahphang/cs371p-darwin-tests/-/pipelines/1544743696)
+* GitLab Pipelines: Darwin Tests Pipeline(https://gitlab.com/karahphang/cs371p-darwin-tests/-/pipelines/1544743696)
+                    Pipeline for Darwin: https://gitlab.com/karahphang/cs371p-darwin/-/pipelines/1553635941
 
 * Estimated completion time: 13 hours
 
