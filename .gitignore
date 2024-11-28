@@ -1,0 +1,10 @@
+.DS_Store
+*.gcda
+*.gcno
+*.tmp.txt
+cs371p-darwin.bbprojectd
+Doxyfile
+latex
+run_Darwin
+test_Darwin
+
