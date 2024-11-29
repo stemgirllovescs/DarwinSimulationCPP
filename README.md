@@ -6,10 +6,10 @@
 
 * GitLab ID: karahphang and katherineliang100
 
-* Git SHA: 89344494ab271cf8920240e0edc7b5a7a57bc1d6
+* Git SHA: 19cca7526a9106c1b362dcfe0a1923aea1c60ef3
 
-* GitLab Pipelines: Darwin Tests Pipeline(https://gitlab.com/karahphang/cs371p-darwin-tests/-/pipelines/1544743696)
-                    Pipeline for Darwin: https://gitlab.com/karahphang/cs371p-darwin/-/pipelines/1553635941
+* GitLab Pipelines: Darwin Tests Pipeline(https://gitlab.com/karahphang/cs371p-darwin-tests/-/pipelines/1544743696)  
+                    Pipeline for Darwin: https://gitlab.com/karahphang/cs371p-darwin/-/pipelines/1565032319/builds
 
 * Estimated completion time: 13 hours
 
