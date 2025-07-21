@@ -1,18 +1,65 @@
-# CS371p: Object-Oriented Programming Darwin Repo
+# DarwinSimulationCPP
 
-* Name: Karah Phang and Katherine Liang
+A C++17 implementation of the classic **Darwin** “organism strategy” assignment for UT Austin’s *CS 371P: Object‑Oriented Programming* course.  
+The program simulates multiple species competing on a grid. Each species is governed by a simple instruction set (e.g., `hop`, `left`, `right`, `infect`, conditional checks). Over successive rounds, the organisms follow their instructions, interact with neighbours, and attempt to dominate the board.
 
-* EID: kp33527 and Xl5878
+---
 
-* GitLab ID: karahphang and katherineliang100
+## Project Goals
+1. **Explore OOP design** — clean class hierarchies for `World`, `Creature`, and `Species`.
+2. **Model finite‑state behaviour** — each species is a tiny program with its own instruction pointer.
+3. **Practice incremental development** — features were added checkpoint‑by‑checkpoint (HackerRank style), with new runner inputs at each stage.
+4. **Strengthen test‑driven mindset** — separate test cases validate parsing, movement, infection rules, and boundary conditions.
 
-* Git SHA: 19cca7526a9106c1b362dcfe0a1923aea1c60ef3
+---
 
-* GitLab Pipelines: Darwin Tests Pipeline(https://gitlab.com/karahphang/cs371p-darwin-tests/-/pipelines/1544743696)  
-                    Pipeline for Darwin: https://gitlab.com/karahphang/cs371p-darwin/-/pipelines/1565032319/builds
+## Roles & Contributions
+| Team Member | Focus |
+|-------------|-------|
+| **Katherine Liang** (`stemgirllovescs`) | Core simulation engine, class design, instruction parser, world rendering. |
+| **Teammate** | Designed and implemented unit / integration tests to verify behaviour in edge cases and randomized worlds. |
 
-* Estimated completion time: 13 hours
+We also leveraged **ChatGPT** for debugging: prompts like *“Please debug my C++ code; I’m getting a segmentation fault in the infect logic”* helped identify pointer errors and improve runtime efficiency.
 
-* Actual completion time: 17 hours
+---
 
-* Comments: 
+## Build & Run
+```bash
+# Compile
+make            # uses the provided Makefile
+
+# Run with a sample world definition
+./Darwin sample.world
+```
+
+### File Formats
+* `.spc` — species program files  (one instruction per line)  
+* `.world` — initial board setup (rows, cols, followed by creature positions)
+
+---
+
+## Directory Guide
+```
+DarwinSimulationCPP/
+├── Darwin.cpp          # main driver
+├── World.{h,cpp}       # grid representation
+├── Species.{h,cpp}     # instruction storage & parsing
+├── Creature.{h,cpp}    # state of each organism
+├── Makefile
+├── tests/              # teammate’s test cases (Google Test)
+└── sample/             # example .spc and .world files
+```
+
+---
+
+## Key Concepts Demonstrated
+- Object‑oriented modelling (encapsulation, inheritance)
+- Finite‑state machines
+- File I/O & robust parsing
+- Incremental/refactoring workflow
+- Team collaboration + test‑driven development
+
+---
+
+## License
+MIT License — see `LICENSE` for details.
